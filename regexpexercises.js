@@ -20,14 +20,15 @@ var unwritten = 0;
 // Fill in the regular expressions
 
 // 1.  Escriba una expresión regular que reconozca las cadenas de doble comillas. Debe permitir la presencia de comillas y caracteres escapados. 
-verify(/.../,
-       ["...", "..."],
-       ["...", "..."]);
+verify(/"(\\"|[^"])+"/,
+       ["Mi libro \"luna de pluton\"", "Mi \"libro\" luna de pluton 2",'"She said \"hello\""'],
+       ["Lorem ipsum"]);
 
 // 2. Escriba una expresión regular que reconozca los números en punto flotante (por ejemplo `-2.3e-1`, `-3e2`, `23`, `3.2`). numbers = /^ ... $/, matching exacto
-verify(/.../,
-       ["...", "..."],
-       ["..."]);
+verify(/\d+([e\.]\d+)*/,
+
+       ["-288.2e-200", "+25e12"],
+       ["Mi libro "]);
 
 
 // 4. Escriba una expresión regular que case con los números no primos expresados en unario. Pruebe con `1111`, `111`, `111111`, `1111111`, ...
@@ -36,10 +37,9 @@ verify(/.../,
        ["...", "..."]);
 
 // 5. Escriba una expresión regular que case con los comentarios JavaScript. 
-verify(/.../,
-       ["...", "..."],
-       ["...", "..."]);
-
+verify(/(?:\/{2}.*\n?|\/\*.*\*\/)/,
+      ["//Esto es un comentario", "/*comentario1\\comentario2*/"],
+      ["/falla", "/*evidentemente falla"]);
 if (unwritten) console.log("Quedan "+unwritten+" regexps sin escribir");
 
 function verify(regexp, yes, no) {

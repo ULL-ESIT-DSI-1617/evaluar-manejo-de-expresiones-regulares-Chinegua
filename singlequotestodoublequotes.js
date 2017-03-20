@@ -11,7 +11,8 @@ replacement.
 
 var text = "'I'm the cook,' he said, 'it's my job.'";
 // Change this call.
-var result = text.replace(/.../g, '...');
+var result = text.replace(/^'|(\W)'|'(\W)|$'/g, '$1"$2'); //g todas las apariciones
+//$1 pone lo que caza la primera vez , le pone comillas dobles y pone lo que caza la segunda vez
 console.log(result);
 var expected = `"I'm the cook," he said, "it's my job."`;
 if (expected === result) console.log("OK")
